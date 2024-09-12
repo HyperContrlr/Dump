@@ -23,6 +23,8 @@ public class playerMove : MonoBehaviour
     private Vector2 moveInput;
     private Rigidbody2D rb2d;
 
+    public speedometer speed;
+    public Animator animator;
 
     //LEARN RAYCASTING & STUFF FOR STICKINESS
 
@@ -44,8 +46,15 @@ public class playerMove : MonoBehaviour
             rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isAirborne = true;
         }
-        
-      
+        if (speed.speed >= 3)
+        {
+            animator.SetBool("IsMoving", true);
+        }
+        else if (speed.speed <= 2)
+        {
+            animator.SetBool("IsMoving", false);
+        }
+
         //Moves character down (Fastfall)
         if (Input.GetKeyDown(down) && isAirborne)
         {
