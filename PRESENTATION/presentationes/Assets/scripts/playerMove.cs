@@ -25,6 +25,7 @@ public class playerMove : MonoBehaviour
 
     public speedometer speed;
     public Animator animator;
+    public SpriteRenderer spriteRenderer;
 
     //LEARN RAYCASTING & STUFF FOR STICKINESS
 
@@ -34,6 +35,7 @@ public class playerMove : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -60,7 +62,14 @@ public class playerMove : MonoBehaviour
         {
             rb2d.AddForce(Vector2.down * stompForce);
         }
-
+        if (Input.GetKeyDown(key: left))
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (Input.GetKeyDown(key: right))
+        { 
+            spriteRenderer.flipX = false; 
+        }
     }
     private void FixedUpdate()
     {
@@ -104,16 +113,16 @@ public class playerMove : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("water"))
+        /*if (other.gameObject.CompareTag("water"))
         {
             print("In");
-        }
+        }*/
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("water"))
+        /*if (other.gameObject.CompareTag("water"))
         {
             print("Out");
-        }
+        }*/
     }
 }
